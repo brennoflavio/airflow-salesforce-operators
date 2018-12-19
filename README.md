@@ -3,7 +3,7 @@
 This script allows Airflow to iterate with Salesforce. Currently are supported:
 
 1. Copy Salesforce Objects into csv on Amazon S3 based on a SOQL query,
-2. Insert, Updtade or Delete Salesforce Object Records based on a csv file on Amazon S3
+2. Insert, Update or Delete Salesforce Object Records based on a csv file on Amazon S3
 
 ## Installing
 Copy python file to Airflow Plugins folder. Your Airflow instance must have ```simple-salesforce``` package installed.
@@ -14,7 +14,7 @@ The connection must have the following parameters:
 Conn Type: HTTP
 Host: Your Salesforce URL Instance
 Login: Your Email Login
-Passord: Password
+Password: Password
 Extra: {"security_token": "your-security-token"}
 ```
 
@@ -36,7 +36,7 @@ with dag:
     unload_account = SalesforceToS3Operator(
         task_id="unload_account",
         sql="select Id from Account",
-        dest_key=f"airflow/reports/unload_account_{ds}",
+        dest_key=f"airflow/unload_account_{ds}",
         dest_bucket="aws",
         salesforce_conn_id="salesforce",
         aws_conn_id="aws",
